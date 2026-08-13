@@ -265,26 +265,17 @@ a{ text-decoration:none; }
 }
 .page-content .btn{ margin-top:0.75rem; }
 
-.section-tint{
-  background:var(--sand);
-  padding:5rem 1.5rem;
-}
-.section-tint .inner{
+.prog-section{ padding:4.5rem 1.5rem; }
+.prog-section.tint{ background:var(--sand); }
+.prog-section .inner{
   max-width:900px;
   margin:0 auto;
   text-align:center;
 }
-.section-tint .eyebrow{ color:var(--terracotta); }
-.section-tint h2{
-  font-size:clamp(2rem, 5.5vw, 2.8rem);
+.prog-section .eyebrow{ color:var(--terracotta); }
+.prog-section h2{
+  font-size:clamp(1.8rem, 5vw, 2.5rem);
   color:var(--night-deep);
-  margin-bottom:1.25rem;
-}
-.section-tint > .inner > p{
-  font-size:1.1rem;
-  color:#3d3d3a;
-  max-width:52ch;
-  margin:0 auto;
 }
 
 .concurso-submenu{
@@ -310,11 +301,17 @@ a{ text-decoration:none; }
 
 .day-grid{
   display:grid;
-  grid-template-columns:repeat(auto-fit, minmax(150px, 1fr));
+  grid-template-columns:repeat(4, 1fr);
   gap:1rem;
   max-width:900px;
   margin:2.5rem auto 0;
   text-align:left;
+}
+@media (max-width:720px){
+  .day-grid{ grid-template-columns:repeat(2, 1fr); }
+}
+@media (max-width:420px){
+  .day-grid{ grid-template-columns:1fr; }
 }
 .day-card{
   background:var(--cream);
@@ -335,6 +332,35 @@ a{ text-decoration:none; }
   font-size:0.9rem;
   color:#5c5c58;
   max-width:none;
+}
+
+.day-card-split{
+  background:var(--cream);
+  border:1.5px solid rgba(28,42,74,0.12);
+  border-radius:12px;
+  overflow:hidden;
+}
+.day-card-split .day-card-split-head{
+  padding:0.85rem 1.1rem 0.35rem;
+  font-family:'Anton', sans-serif;
+  font-size:0.8rem;
+  color:var(--terracotta);
+  letter-spacing:0.06em;
+}
+.day-card-split .half{ padding:0.75rem 1.1rem; }
+.day-card-split .half + .half{ border-top:1px solid rgba(28,42,74,0.12); }
+.day-card-split .half-label{
+  display:block;
+  font-family:'Anton', sans-serif;
+  font-size:0.75rem;
+  color:var(--night-deep);
+  letter-spacing:0.05em;
+  margin-bottom:0.2rem;
+}
+.day-card-split .half p{
+  margin:0;
+  font-size:0.85rem;
+  color:#5c5c58;
 }
 
 /* ---------- PATROCÍNIO (rodapé) ---------- */
@@ -386,3 +412,20 @@ footer.patrocinio p{
   font-size:0.8rem;
   color:#5c6788;
 }
+
+.footer-contacts{
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:1.5rem;
+  margin-top:2rem;
+}
+.footer-contacts a{
+  font-family:'Karla', sans-serif;
+  font-weight:700;
+  font-size:0.85rem;
+  letter-spacing:0.02em;
+  color:var(--sand);
+  transition:color 0.15s ease;
+}
+.footer-contacts a:hover{ color:var(--cream); }
