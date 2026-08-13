@@ -219,10 +219,13 @@ a{ text-decoration:none; }
   color:var(--cream);
   overflow:hidden;
 }
-.page-hero .eyebrow{ color:var(--sand); }
+.page-hero .eyebrow{ color:var(--sand); position:relative; z-index:2; }
 .page-hero h1{
   font-size:clamp(2.4rem, 7vw, 4.5rem);
   color:var(--cream);
+  position:relative;
+  z-index:2;
+  text-shadow:0 3px 14px rgba(16,26,51,0.55);
 }
 .page-hero .dunes-mini{
   position:absolute;
@@ -231,6 +234,35 @@ a{ text-decoration:none; }
   height:auto;
   display:block;
   opacity:0.9;
+}
+
+.page-banner{
+  max-width:1100px;
+  margin:-3rem auto 0;
+  padding:0 1.5rem;
+  position:relative;
+  z-index:3;
+}
+.page-banner .banner-slot{
+  aspect-ratio:21/6;
+  border:2px dashed rgba(28,42,74,0.25);
+  border-radius:16px;
+  background:var(--sand);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:1rem;
+  color:var(--night-deep);
+  font-family:'Karla', sans-serif;
+  font-weight:700;
+  font-size:0.85rem;
+  text-transform:uppercase;
+  letter-spacing:0.05em;
+  box-shadow:0 12px 28px rgba(16,26,51,0.15);
+}
+@media (max-width:600px){
+  .page-banner .banner-slot{ aspect-ratio:4/3; }
 }
 
 .breadcrumb{
@@ -244,6 +276,8 @@ a{ text-decoration:none; }
   margin-bottom:1.25rem;
 }
 .breadcrumb:hover{ text-decoration:underline; }
+
+.breadcrumb-dark{ color:var(--terracotta); }
 
 .page-content{
   max-width:760px;
@@ -318,6 +352,12 @@ a{ text-decoration:none; }
   border:1.5px solid rgba(28,42,74,0.12);
   border-radius:12px;
   padding:1.25rem;
+  cursor:pointer;
+  transition:transform 0.2s ease, box-shadow 0.2s ease;
+}
+.day-card:hover{
+  transform:scale(1.05);
+  box-shadow:0 10px 24px rgba(28,42,74,0.15);
 }
 .day-card .day-number{
   display:block;
@@ -339,6 +379,12 @@ a{ text-decoration:none; }
   border:1.5px solid rgba(28,42,74,0.12);
   border-radius:12px;
   overflow:hidden;
+  cursor:pointer;
+  transition:transform 0.2s ease, box-shadow 0.2s ease;
+}
+.day-card-split:hover{
+  transform:scale(1.05);
+  box-shadow:0 10px 24px rgba(28,42,74,0.15);
 }
 .day-card-split .day-card-split-head{
   padding:0.85rem 1.1rem 0.35rem;
@@ -360,6 +406,88 @@ a{ text-decoration:none; }
 .day-card-split .half p{
   margin:0;
   font-size:0.85rem;
+  color:#5c5c58;
+}
+
+/* ---------- MODAL DO CARD ---------- */
+.modal-overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(16,26,51,0.65);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:1.5rem;
+  opacity:0;
+  visibility:hidden;
+  transition:opacity 0.2s ease, visibility 0.2s;
+  z-index:200;
+}
+.modal-overlay.is-open{
+  opacity:1;
+  visibility:visible;
+}
+
+.modal-box{
+  position:relative;
+  background:var(--cream);
+  border-radius:16px;
+  padding:2.5rem 2rem 2rem;
+  max-width:400px;
+  width:100%;
+  text-align:left;
+  box-shadow:0 24px 48px rgba(0,0,0,0.3);
+  transform:scale(0.94);
+  transition:transform 0.2s ease;
+}
+.modal-overlay.is-open .modal-box{ transform:scale(1); }
+
+.modal-close{
+  position:absolute;
+  top:0.75rem;
+  right:0.75rem;
+  width:36px;
+  height:36px;
+  border:none;
+  border-radius:50%;
+  background:transparent;
+  color:var(--night-deep);
+  font-size:1.4rem;
+  line-height:1;
+  cursor:pointer;
+  transition:background 0.15s ease;
+}
+.modal-close:hover{ background:rgba(28,42,74,0.08); }
+.modal-close:focus-visible{ outline:2px solid var(--terracotta); outline-offset:2px; }
+
+.modal-content .day-number{
+  display:block;
+  font-family:'Anton', sans-serif;
+  font-size:1rem;
+  color:var(--terracotta);
+  letter-spacing:0.06em;
+  margin-bottom:0.5rem;
+}
+.modal-content .day-card-split-head{
+  font-family:'Anton', sans-serif;
+  font-size:1rem;
+  color:var(--terracotta);
+  letter-spacing:0.06em;
+  margin-bottom:0.75rem;
+}
+.modal-content .half{ padding:0.5rem 0; }
+.modal-content .half + .half{ border-top:1px solid rgba(28,42,74,0.12); }
+.modal-content .half-label{
+  display:block;
+  font-family:'Anton', sans-serif;
+  font-size:0.85rem;
+  color:var(--night-deep);
+  letter-spacing:0.05em;
+  margin-bottom:0.2rem;
+}
+.modal-content p{
+  margin:0;
+  font-size:0.95rem;
   color:#5c5c58;
 }
 
