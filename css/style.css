@@ -209,6 +209,7 @@ a{ text-decoration:none; }
     justify-content:space-between;
     padding:0.65rem 1.25rem;
     gap:0.75rem;
+    position:relative;
   }
   .nav-toggle-menu{ display:inline-flex; font-size:1.3rem; }
   .nav-current-page{ display:inline-block; }
@@ -219,21 +220,32 @@ a{ text-decoration:none; }
     margin-right:0;
   }
 
+  /* Logo e botão ficam sempre visíveis, por cima do painel de tela cheia */
+  .nav-logo, .nav-right-group{
+    position:relative;
+    z-index:130;
+  }
+
   .nav-links{
-    flex-basis:100%;
-    width:100%;
+    position:fixed;
+    inset:0;
+    width:100vw;
+    height:100vh;
+    height:100dvh;
+    background:var(--night-deep);
     flex-direction:column;
     align-items:flex-start;
+    justify-content:flex-start;
     gap:0;
-    max-height:0;
-    overflow-x:hidden;
-    overflow-y:hidden;
-    transition:max-height 0.3s ease;
-  }
-  .navbar.menu-open .nav-links{
-    max-height:calc(100vh - 64px);
+    padding:5.5rem 1.5rem 2rem;
     overflow-y:auto;
     -webkit-overflow-scrolling:touch;
+    transform:translateX(100%);
+    transition:transform 0.3s ease;
+    z-index:120;
+  }
+  .navbar.menu-open .nav-links{
+    transform:translateX(0);
   }
   .nav-links a{ width:100%; padding:0.85rem 0.25rem; }
 

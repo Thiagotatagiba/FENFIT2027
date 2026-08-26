@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', function () {
       var isOpen = navbar.classList.toggle('menu-open');
       menuToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
       menuToggle.innerHTML = isOpen ? '&#10005;' : '&#9776;';
+      document.body.style.overflow = isOpen ? 'hidden' : '';
 
       if (!isOpen) {
         document.querySelectorAll('.nav-item.open').forEach(function (item) {
@@ -19,6 +20,8 @@ document.addEventListener('DOMContentLoaded', function () {
           var btn = item.querySelector('.nav-toggle-sub');
           if (btn) btn.setAttribute('aria-expanded', 'false');
         });
+        var navLinksEl = document.querySelector('.nav-links');
+        if (navLinksEl) navLinksEl.scrollTop = 0;
       }
     });
   }
@@ -42,10 +45,15 @@ document.addEventListener('DOMContentLoaded', function () {
       navItem.classList.toggle('open', willOpen);
       btn.setAttribute('aria-expanded', willOpen ? 'true' : 'false');
 
-      // Rola até o submenu recém-aberto pra facilitar ver as opções dele
+      // Rola só o painel do menu até o submenu recém-aberto (sem afetar o resto da página)
       if (willOpen) {
         requestAnimationFrame(function () {
-          navItem.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          var navLinksEl = document.querySelector('.nav-links');
+          if (!navLinksEl) return;
+          var panelRect = navLinksEl.getBoundingClientRect();
+          var itemRect = navItem.getBoundingClientRect();
+          var targetScroll = navLinksEl.scrollTop + (itemRect.top - panelRect.top) - 8;
+          navLinksEl.scrollTo({ top: targetScroll, behavior: 'smooth' });
         });
       }
     });
@@ -59,6 +67,7 @@ document.addEventListener('DOMContentLoaded', function () {
         menuToggle.setAttribute('aria-expanded', 'false');
         menuToggle.innerHTML = '&#9776;';
       }
+      document.body.style.overflow = '';
     });
   });
 
