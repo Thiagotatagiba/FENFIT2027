@@ -296,6 +296,14 @@ a{ text-decoration:none; }
   background:radial-gradient(circle at 50% 50%, var(--sand) 0%, var(--terracotta) 70%, transparent 72%);
   opacity:0.9;
 }
+@media (max-width:640px){
+  .hero{ min-height:74vh; }
+  .sun{
+    width:min(58vw, 260px);
+    height:min(58vw, 260px);
+    bottom:10%;
+  }
+}
 @media (prefers-reduced-motion: no-preference){
   .sun{ animation:sunrise 2.4s cubic-bezier(0.22, 1, 0.36, 1) both, glow 5s ease-in-out infinite 2.4s; }
   @keyframes sunrise{
