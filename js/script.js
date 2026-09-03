@@ -3,6 +3,31 @@ document.addEventListener('DOMContentLoaded', function () {
   fenfitInjectPartials();
   fenfitHighlightActiveLink();
 
+  // ---------- TEMA ALTERNATIVO POR PÁGINA ----------
+  var currentPage = location.pathname.split('/').pop() || 'index.html';
+  if (currentPage === 'parceiros.html') {
+    document.body.classList.add('theme-palm');
+  }
+
+  // ---------- REVELAR SEÇÕES AO ROLAR ----------
+  var revealTargets = document.querySelectorAll(
+    '.page-content, .prog-section .inner, .concurso-item, .day-card, .day-card-split'
+  );
+  if (revealTargets.length && 'IntersectionObserver' in window) {
+    revealTargets.forEach(function (el) { el.classList.add('reveal-init'); });
+
+    var revealObserver = new IntersectionObserver(function (entries, observer) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+
+    revealTargets.forEach(function (el) { revealObserver.observe(el); });
+  }
+
   // ---------- MENU MOBILE ----------
   var navbar = document.querySelector('.navbar');
   var menuToggle = document.querySelector('.nav-toggle-menu');
